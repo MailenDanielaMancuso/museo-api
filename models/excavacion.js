@@ -1,0 +1,27 @@
+'use strict'
+
+const mongoose = require('mongoose')
+const Schema  = mongoose.Schema
+
+const ExcavacionSchema = Schema({
+    codigo:String,
+    nombre:String,
+    descripcion:String,
+    puntoGps: [Number],
+    fechaInicio: Date,
+    fechaBaja: Date,
+    motivoBaja:String,
+    director: String,
+    directorId: String,
+    paleontologo: String,
+    colector: String,
+    area: String,
+    localidad: String,
+    provincia:String,
+    bochonesEncontrados: [String],
+    fotosExcavacion: [String],
+    videosExcavacion: [String],
+    muestraHome: Boolean
+})
+
+module.exports = mongoose.model('Excavacion', ExcavacionSchema)
