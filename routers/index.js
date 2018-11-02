@@ -7,7 +7,10 @@ const excavacionCtrl = require ('../controllers/excavacion')
 const bochonCtrl = require('../controllers/bochon')
 const piezaCtrl = require('../controllers/pieza')
 const ejemplarCtrl = require('../controllers/ejemplar')
+const homeCtrl = require('../controllers/home')
 const api = express.Router()
+
+api.get('/info',homeCtrl.getHome) // obtiene todos los datos del Home unico documento
 
 api.get('/product',productCtrl.getProducts) //obtiene todos los productos
 api.get('/product/:productId',productCtrl.getProduct) // obtiene el producto cuyo id es productId

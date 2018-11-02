@@ -11,11 +11,16 @@ const MedidasPiezaSchema = Schema({
     circunferencia: Number
 })
 
+const Dupla = Schema({
+    nombre:String,
+    descripcion:String
+})
+
 const PiezaSchema = Schema({
    identificador: String,
    tipoPieza: String,
    medidasPieza:MedidasPiezaSchema,
-   imagenesPieza:[String],
+   imagenesPieza:[Dupla],
    fechaIngreso:Date,
    fechaBaja:Date,
    motivoBaja:String,

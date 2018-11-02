@@ -19,6 +19,11 @@ const AreaHallazgoSchema = Schema({
     provincia:String
 })
 
+const Dupla = Schema({
+    nombre:String,
+    descripcion:String
+})
+
 const EjemplarSchema = Schema({
    tipoEjemplar:{type: String, enum:['encontrado', 'no encontrado']},
    taxonReino:String,
@@ -30,6 +35,7 @@ const EjemplarSchema = Schema({
    taxonEspecie:String,
    eraGeologica:[AreaGeologicaSchema],
    ilustracionCompleta:String,
+   descripcionIC:String,
    areaHallazgo:[AreaHallazgoSchema],
    nroColeccion:String,
    dimensionLargo:Number,
@@ -38,7 +44,7 @@ const EjemplarSchema = Schema({
    alimentacion:String,
    fechaIngresoColeccion:Date,
    ubicacionMuseo: String,
-   fotosEjemplar:[String],
+   fotosEjemplar:[Dupla],
    videosEjemplar:[String],
    fechaBaja: Date,
    motivoBaja:String,

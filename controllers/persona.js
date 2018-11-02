@@ -38,7 +38,6 @@ function savePersona(req,res){
     persona.dni = req.body.dni
     persona.fechaInicio = req.body.fechaInicio
     persona.titulos = req.body.titulos
-    persona.curriculum = req.body.curriculum
     persona.foto = req.body.foto
     persona.fechaBaja = req.body.fechaBaja
     persona.motivoBaja = req.body.motivoBaja

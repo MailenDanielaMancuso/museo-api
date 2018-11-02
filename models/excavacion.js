@@ -3,6 +3,11 @@
 const mongoose = require('mongoose')
 const Schema  = mongoose.Schema
 
+const Dupla = Schema({
+    nombre:String,
+    descripcion:String
+})
+
 const ExcavacionSchema = Schema({
     codigo:String,
     nombre:String,
@@ -19,7 +24,7 @@ const ExcavacionSchema = Schema({
     localidad: String,
     provincia:String,
     bochonesEncontrados: [String],
-    fotosExcavacion: [String],
+    fotosExcavacion: [Dupla],
     videosExcavacion: [String],
     muestraHome: Boolean
 })

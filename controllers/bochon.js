@@ -20,6 +20,7 @@ function getbochonCampo(req, res) { // busca un bochon por nro de campo
     })
 }
 
+
 function getbochones(req, res){
     Bochon.find({},(err,bochones)=>{
         if(err) return res.status(500).send({message:`Error al realizar la petición: ${err}`})
