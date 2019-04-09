@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
+const mongoose = require('mongoose');
+const Schema  = mongoose.Schema;
 
-const mongoose = require('mongoose')
-const Schema  = mongoose.Schema
 
 const Dupla = Schema({
     nombre:String,
     descripcion:String
-})
+});
 
 const ExcavacionSchema = Schema({
     codigo:String,
@@ -20,13 +20,14 @@ const ExcavacionSchema = Schema({
     directorId: String,
     paleontologo: String,
     colector: String,
+    idArea: {type: String, ref: 'Area'},
     area: String,
     localidad: String,
     provincia:String,
     bochonesEncontrados: [String],
     fotosExcavacion: [Dupla],
     videosExcavacion: [String],
-    muestraHome: Boolean
-})
+    muestraHome: Boolean,
+});
 
-module.exports = mongoose.model('Excavacion', ExcavacionSchema)
+module.exports = mongoose.model('Excavacion', ExcavacionSchema);
