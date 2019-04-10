@@ -8,6 +8,7 @@ const bochonCtrl = require('../controllers/bochon')
 const piezaCtrl = require('../controllers/pieza')
 const ejemplarCtrl = require('../controllers/ejemplar')
 const homeCtrl = require('../controllers/home')
+const areaCtrl = require('../controllers/areaController')
 const api = express.Router()
 
 api.get('/info',homeCtrl.getHome) // obtiene todos los datos del Home unico documento
@@ -49,6 +50,14 @@ api.get('/ejemplarId/:ejemplarId',ejemplarCtrl.getejemplarId)
 api.get('/ejemplarNroColeccion/:ejemplarId', ejemplarCtrl.getejemplarNroColeccion)
 api.get('/ejemplarHome/:ejemplarId',ejemplarCtrl.getejemplarHome)
 api.post('/ejemplar', ejemplarCtrl.saveEjemplar)
+
+
+// Area Data
+api.get('/areas', areaCtrl.getAllAreas)
+api.get('/area', areaCtrl.getAreaById)
+api.post('/area', areaCtrl.createArea)
+api.put('/area', areaCtrl.updateArea)
+api.delete('/area', areaCtrl.removeArea)
 
 
 module.exports = api

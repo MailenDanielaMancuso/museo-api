@@ -1,13 +1,20 @@
 'use strict';
-import areaService from '../services/areaService';
+const areaService = require('../services/areaService');
 
+const createArea = (req,res) => areaService.createArea(req,res);
 
-export const createArea = (req,res) => areaService.createArea(req,res);
+const getAllAreas = (req, res) => areaService.getAllAreas(req,res);
 
-export const getAllAreas = (req, res) => areaService.getAllAreas(req,res);
+const getAreaById = (req, res) => areaService.getAreaById(req, res)
 
-export const getAreaById = (req, res) => areaService.gerAreaById(req, res)
+const updateArea = (req,res) => areaService.updateArea(req, res);
 
-export const updateArea = (req,res) => areaService.updateArea(req, res);
+const removeArea = (req,res) => areaService.removeArea(req, res);
 
-export const deleteArea = (req,res) => areaService.removeArea(req, res);
+module.exports = {
+    createArea,
+    getAllAreas,
+    getAreaById,
+    updateArea,
+    removeArea,
+};
