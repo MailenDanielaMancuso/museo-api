@@ -51,7 +51,6 @@ api.get('/ejemplarNroColeccion/:ejemplarId', ejemplarCtrl.getejemplarNroColeccio
 api.get('/ejemplarHome/:ejemplarId',ejemplarCtrl.getejemplarHome)
 api.post('/ejemplar', ejemplarCtrl.saveEjemplar)
 
-
 // Area Data
 api.get('/areas', areaCtrl.getAllAreas)
 api.get('/area', areaCtrl.getAreaById)

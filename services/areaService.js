@@ -22,7 +22,6 @@ getAllAreas = (req, res) => {
 // };
 
 getAreaById = (req, res) => {
-    console.log('**************')
     return res.status(200).send({ result: 'get area by Id' });
     // const { areaId } = req.params;
     // Area.findById(areaId, (err, area) => {
