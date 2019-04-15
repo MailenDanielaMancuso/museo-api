@@ -22,7 +22,12 @@ getAllAreas = (req, res) => {
 // };
 
 getAreaById = (req, res) => {
-    return res.status(200).send({ result: 'get area by Id' });
+    result = [
+        { lat : -34.603500, lng : -58.381500 },
+        { lat : -35.603600, lng : -57.381400 },
+        { lat : -36.603700, lng : -58.381300 },
+    ];
+    return res.status(200).send({ result });
     // const { areaId } = req.params;
     // Area.findById(areaId, (err, area) => {
     //     if (err) return res.status(500).send(`Error al intentar recuperar el area: ${areaId}`);
