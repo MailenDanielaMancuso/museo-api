@@ -4,22 +4,20 @@ const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
 const AreaSchema = new Schema({
-    idArea:String,
-    nombre:String,
-    // lala
-    idCiudad:String,
-    idProvincia: String,
-    idPais: String,
-    locacion: {
-        type: { type: String },
-        coordinates: [],
-    },
+  idArea:String,
+  nombre:String,
+  idCiudad:String,
+  idProvincia: String,
+  idPais: String,
+  locacion: {
+    type: String,
+    coordinates: [],
+  },
 });
 
 AreaSchema.index({ locacion: '2dsphere' });
 
 module.exports = mongoose.model('Area', AreaSchema);
-
 
 // A is Area
 // mongoose.connection.on('open', function () {

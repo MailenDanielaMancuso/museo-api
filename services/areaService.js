@@ -22,10 +22,28 @@ getAllAreas = (req, res) => {
 // };
 
 getAreaById = (req, res) => {
+  // idArea:String,
+  // nombre:String,
+  // idCiudad:String,
+  // idProvincia: String,
+  // idPais: String,
+  // locacion: {
+  //   type: String,
+  //   coordinates: [],
+  // },
     result = [
-        { lat : -34.603500, lng : -58.381500 },
-        { lat : -35.603600, lng : -57.381400 },
-        { lat : -36.603700, lng : -58.381300 },
+      {
+        type: 'Point',
+        coordinates: [{ lat : -34.603500, lng : -58.381500 }],
+      },
+      {
+        type: 'Point',
+        coordinates: [{ lat : -35.603600, lng : -57.381400 }],
+      },
+      {
+        type: 'Point',
+        coordinates: [{ lat : -36.603700, lng : -58.381300 }],
+      },
     ];
     return res.status(200).send({ result });
     // const { areaId } = req.params;
