@@ -1,17 +1,45 @@
 const Area = require('../models/area');
 
 createArea = (req, res) => {
-    return res.status(200).send({ result: 'create new area' });
-    // const { nombre, idCiudad, idProvincia, idPais, location } = req.body;
-    // const area = new Area(nombre, idCiudad, idProvincia, idPais, location);
-    // return area.save((err, areaStored) => {
-    //     if(err) res.status(500).send({message:`Error al insertar area en la Base de Datos: ${err}`});
-    //     res.status(200).send({ area: areaStored});
-    // })
+  // {
+  //   "nombre": "Area 1",
+  //   "idCiudad": "1",
+  //   "idProvincia": "1",
+  //   "idPais": "1",
+  //   "locacion": [
+  //      {
+  //         "type": "Point",
+  //         "coordinates": [{ "lat": -34.603500, "lng": -58.381500 }]
+  //       },
+  //       {
+  //         "type": "Point",
+  //         "coordinates": [{ "lat": -35.603600, "lng": -57.381400 }]
+  //       },
+  //       {
+  //         "type": "Point",
+  //         "coordinates": [{ "lat": -36.603700, "lng": -58.381300 }]
+  //       }
+  //    ]
+  // }
+
+  // return res.status(200).send({ result: 'create new area' });
+  const { nombre, idCiudad, idProvincia, idPais, locacion } = req.body;
+  const area = new Area();
+  area.nombre = nombre;
+  area.idCiudad = idCiudad;
+  area.idProvincia = idProvincia;
+  area.idPais = idPais;
+  area.locacion = locacion;
+
+  return area.save((err, areaStored) => {
+    console.log('*********** ', err, areaStoredT)
+      if(err) res.status(500).send({message:`Error al insertar area en la Base de Datos: ${err}`});
+      res.status(200).send({ area: areaStored});
+  });
 };
 
 getAllAreas = (req, res) => {
-    return res.status(200).send({ result: 'get areas' });
+  return res.status(200).send({ result: 'get areas' });
 }; 
 // getAllAreas = (req, res) => {
 //     Area.find({}, (err, areas) => {
@@ -22,15 +50,6 @@ getAllAreas = (req, res) => {
 // };
 
 getAreaById = (req, res) => {
-  // idArea:String,
-  // nombre:String,
-  // idCiudad:String,
-  // idProvincia: String,
-  // idPais: String,
-  // locacion: {
-  //   type: String,
-  //   coordinates: [],
-  // },
     result = [
       {
         type: 'Point',
@@ -74,10 +93,10 @@ removeArea = (req, res) => {
     //     });
 };
 
-module.exports ={
+module.exports = {
     getAllAreas,
     getAreaById,
     createArea,
     updateArea,
     removeArea,
-}
+};

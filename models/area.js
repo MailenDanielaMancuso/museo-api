@@ -3,23 +3,56 @@
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
-const AreaSchema = new Schema({
-  idArea:String,
-  nombre:String,
-  idCiudad:String,
-  idProvincia: String,
-  idPais: String,
-  locacion: {
+
+const PointSchema = new mongoose.Schema({
+  type: {
     type: String,
-    coordinates: [],
+    enum: ['Point'],
+    required: true
   },
+  coordinates: {
+    type: [Number],
+    required: true
+  }
 });
 
-AreaSchema.index({ locacion: '2dsphere' });
+const LineStringSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['LineString'],
+    required: true
+  },
+  coordinates: {
+    type: [[Number]],
+    required: true
+  }
+});
+
+const PolygonSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Polygon'],
+    required: true
+  },
+  coordinates: {
+    type: [[[Number]]],
+    required: true
+  }
+});
+
+const AreaSchema = new Schema({
+  idArea: String,
+  nombre: String,
+  idCiudad: String,
+  idProvincia: String,
+  idPais: String,
+  locacion: PolygonSchema // o lineString o polygon
+});
+
+// AreaSchema.index({ locacion: '2dsphere' });
 
 module.exports = mongoose.model('Area', AreaSchema);
 
-// A is Area
 // mongoose.connection.on('open', function () {
 //     A.on('index', function (err) {
 //       if (err) return done(err);

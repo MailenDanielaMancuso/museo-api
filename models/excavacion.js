@@ -21,7 +21,6 @@ const ExcavacionSchema = Schema({
     paleontologo: String,
     colector: String,
     idArea: {type: String, ref: 'Area'},
-    area: String,
     localidad: String,
     provincia:String,
     bochonesEncontrados: [String],
