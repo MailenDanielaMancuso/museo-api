@@ -1,32 +1,7 @@
 'use strict';
-
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
-
-const PointSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ['Point'],
-    required: true
-  },
-  coordinates: {
-    type: [Number],
-    required: true
-  }
-});
-
-const LineStringSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ['LineString'],
-    required: true
-  },
-  coordinates: {
-    type: [[Number]],
-    required: true
-  }
-});
 
 const PolygonSchema = new mongoose.Schema({
   type: {
@@ -41,12 +16,12 @@ const PolygonSchema = new mongoose.Schema({
 });
 
 const AreaSchema = new Schema({
-  idArea: String,
+  idArea: Number,
   nombre: String,
-  idCiudad: String,
-  idProvincia: String,
-  idPais: String,
-  locacion: PolygonSchema // o lineString o polygon
+  idCiudad: {type: Number, ref: 'Ciudad'},
+  idProvincia: {type: Number, ref: 'Provincia'},
+  idPais: {type: Number, ref: 'Pais'},
+  locacion: PolygonSchema
 });
 
 // AreaSchema.index({ locacion: '2dsphere' });
@@ -66,10 +41,3 @@ module.exports = mongoose.model('Area', AreaSchema);
 //       })
 //     })
 //   });
-  
-//   function done (err) {
-//     if (err) console.error(err.stack);
-//     mongoose.connection.db.dropDatabase(function () {
-//       mongoose.connection.close();
-//     });
-//   }

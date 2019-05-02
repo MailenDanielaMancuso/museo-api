@@ -52,7 +52,6 @@ api.get('/ejemplarHome/:ejemplarId',ejemplarCtrl.getejemplarHome)
 api.post('/ejemplar', ejemplarCtrl.saveEjemplar)
 
 // Area Data
-api.get('/areas', areaCtrl.getAllAreas)
 api.get('/area', areaCtrl.getAreaById)
 api.post('/area', areaCtrl.createArea)
 api.put('/area', areaCtrl.updateArea)

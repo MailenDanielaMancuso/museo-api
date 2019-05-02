@@ -1,28 +1,7 @@
 const Area = require('../models/area');
 
-createArea = (req, res) => {
-  // {
-  //   "nombre": "Area 1",
-  //   "idCiudad": "1",
-  //   "idProvincia": "1",
-  //   "idPais": "1",
-  //   "locacion": [
-  //      {
-  //         "type": "Point",
-  //         "coordinates": [{ "lat": -34.603500, "lng": -58.381500 }]
-  //       },
-  //       {
-  //         "type": "Point",
-  //         "coordinates": [{ "lat": -35.603600, "lng": -57.381400 }]
-  //       },
-  //       {
-  //         "type": "Point",
-  //         "coordinates": [{ "lat": -36.603700, "lng": -58.381300 }]
-  //       }
-  //    ]
-  // }
 
-  // return res.status(200).send({ result: 'create new area' });
+createArea = (req, res) => {
   const { nombre, idCiudad, idProvincia, idPais, locacion } = req.body;
   const area = new Area();
   area.nombre = nombre;
@@ -31,39 +10,22 @@ createArea = (req, res) => {
   area.idPais = idPais;
   area.locacion = locacion;
 
-  return area.save((err, areaStored) => {
-    console.log('*********** ', err, areaStoredT)
+  return area.save((err, nuevaArea) => {
       if(err) res.status(500).send({message:`Error al insertar area en la Base de Datos: ${err}`});
-      res.status(200).send({ area: areaStored});
+      res.status(200).send({ area: nuevaArea});
   });
 };
 
-getAllAreas = (req, res) => {
-  return res.status(200).send({ result: 'get areas' });
-}; 
-// getAllAreas = (req, res) => {
-//     Area.find({}, (err, areas) => {
-//         if (err) return res.status(500).send({message:`Error al recuperar todas las areas: ${err}`});
-//         if (!areas) return res.status(404).send({message:'No existen areas'});
-//         return res.status(200).send({ areas });
-//     });
-// };
-
 getAreaById = (req, res) => {
-    result = [
-      {
-        type: 'Point',
-        coordinates: [{ lat : -34.603500, lng : -58.381500 }],
-      },
-      {
-        type: 'Point',
-        coordinates: [{ lat : -35.603600, lng : -57.381400 }],
-      },
-      {
-        type: 'Point',
-        coordinates: [{ lat : -36.603700, lng : -58.381300 }],
-      },
-    ];
+    result = {
+      type: 'Polygon',
+      coordinates: [[
+        [-35.603500,-58.381500],
+        [-35.603600,-67.603700],
+        [-34.603700,-58.381300 ],
+        [-36.603500,-56.381500],
+      ]]
+    };
     return res.status(200).send({ result });
     // const { areaId } = req.params;
     // Area.findById(areaId, (err, area) => {
@@ -94,9 +56,8 @@ removeArea = (req, res) => {
 };
 
 module.exports = {
-    getAllAreas,
-    getAreaById,
-    createArea,
-    updateArea,
-    removeArea,
+  getAreaById,
+  createArea,
+  updateArea,
+  removeArea,
 };
