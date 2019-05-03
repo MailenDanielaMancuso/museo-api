@@ -8,7 +8,7 @@ const bochonCtrl = require('../controllers/bochon')
 const piezaCtrl = require('../controllers/pieza')
 const ejemplarCtrl = require('../controllers/ejemplar')
 const homeCtrl = require('../controllers/home')
-const areaCtrl = require('../controllers/areaController')
+// const areaCtrl = require('../controllers/area')
 const api = express.Router()
 
 api.get('/info',homeCtrl.getHome) // obtiene todos los datos del Home unico documento
@@ -24,6 +24,7 @@ api.get('/personaId/:personaId', personaCtrl.getPersonaId)
 api.get('/personaDni/:personaId', personaCtrl.getPersonaDni)
 api.post('/persona', personaCtrl.savePersona)
 
+// Excavacion
 api.get('/excavacion', excavacionCtrl.getExcavaciones)
 api.get('/excavacionId/:excavacionId', excavacionCtrl.getExcavacionId)
 api.get('/excavacionNombre/:excavacionId',excavacionCtrl.getExcavacionNombre)
@@ -31,7 +32,9 @@ api.get('/excavacionHome/:excavacionId', excavacionCtrl.getExcavacionesHome)
 api.get('/excavacionDirector/:excavacionId', excavacionCtrl.getExcavacionesDirector)
 api.get('/excavacionPaleontologo/:excavacionId', excavacionCtrl.getExcavacionesPaleontologo)
 api.get('/excavacionColector/:excavacionId',excavacionCtrl.getExcavacionesColector)
-api.post('/excavacion',excavacionCtrl.saveExcavacion)
+api.post('/excavacion', excavacionCtrl.crearExcavacion)
+// api.put('/excavacion', excavacionCtrl.updateExcavacion)
+// api.delete('/excavacion', excavacionCtrl.removeExcavacion)
 
 api.get('/bochon',bochonCtrl.getbochones)
 api.get('/bochonId/:bochonId',bochonCtrl.getbochonId)
@@ -51,11 +54,10 @@ api.get('/ejemplarNroColeccion/:ejemplarId', ejemplarCtrl.getejemplarNroColeccio
 api.get('/ejemplarHome/:ejemplarId',ejemplarCtrl.getejemplarHome)
 api.post('/ejemplar', ejemplarCtrl.saveEjemplar)
 
-// Area Data
-api.get('/area', areaCtrl.getAreaById)
-api.post('/area', areaCtrl.createArea)
-api.put('/area', areaCtrl.updateArea)
-api.delete('/area', areaCtrl.removeArea)
-
+// Area
+// api.get('/area', areaCtrl.getAreaById)
+// api.post('/area', areaCtrl.createArea)
+// api.put('/area', areaCtrl.updateArea)
+// api.delete('/area', areaCtrl.removeArea)
 
 module.exports = api

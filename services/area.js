@@ -1,22 +1,32 @@
 const Area = require('../models/area');
 
 
-createArea = (req, res) => {
-  const { nombre, idCiudad, idProvincia, idPais, locacion } = req.body;
+crearArea = areaData => {
+  let nuevaArea = null;
+
+  const coordinates = [];
+  areaData.puntos.forEach(punto => {
+    coordinates.push([punto.lat, punto.lng]);
+  });
+  coordinates.push([areaData.puntos[0].lat, areaData.puntos[0].lng])
+  const locacion = {
+    type: 'Polygon',
+    coordinates: [coordinates],
+  };
+
   const area = new Area();
-  area.nombre = nombre;
-  area.idCiudad = idCiudad;
-  area.idProvincia = idProvincia;
-  area.idPais = idPais;
+  area.nombre = 'area 1';
+  area.idCiudad = 14; // Neuquen
+  area.idProvincia = 14; // Neuquen
+  area.idPais = 1; //Argetina
   area.locacion = locacion;
 
-  return area.save((err, nuevaArea) => {
-      if(err) res.status(500).send({message:`Error al insertar area en la Base de Datos: ${err}`});
-      res.status(200).send({ area: nuevaArea});
-  });
+  return area.save()
+    .then(area => area)
+    .catch(err => new Error(`Error al insertar area en la Base de Datos: ${err}`));
 };
 
-getAreaById = (req, res) => {
+recuperarArea = (req, res) => {
     result = {
       type: 'Polygon',
       coordinates: [[
@@ -35,8 +45,8 @@ getAreaById = (req, res) => {
     // })
 };
 
-updateArea = (req, res) => {
-    return res.status(200).send({ result: 'update an area' });
+modificarArea = (req, res) => {
+  return res.status(200).send({ result: 'update an area' });
     // const { areaId } = req.params;
     // Area.update({ _id: areaId }, req.body, (err, value) => {
     //     if (err) return res.status(500).send(`Error al intentar modificar el area: ${areaId}`);
@@ -45,8 +55,8 @@ updateArea = (req, res) => {
     //     });
 };
 
-removeArea = (req, res) => {
-    return res.status(200).send({ result: 'delete an area' });
+eliminarArea = (req, res) => {
+    return res.status(200).send({ result: 'area eliminada' });
     // const { areaId } = req.params;
     // Area.remove({ '_id': areaId }, (err, value) => {
     //     if (err) return res.status(500).send(`Error al intentar eliminar area: ${areaId}`);
@@ -56,8 +66,8 @@ removeArea = (req, res) => {
 };
 
 module.exports = {
-  getAreaById,
-  createArea,
-  updateArea,
-  removeArea,
+  recuperarArea,
+  crearArea,
+  modificarArea,
+  eliminarArea,
 };

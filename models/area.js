@@ -16,15 +16,13 @@ const PolygonSchema = new mongoose.Schema({
 });
 
 const AreaSchema = new Schema({
-  idArea: Number,
+  idArea: String,
   nombre: String,
   idCiudad: {type: Number, ref: 'Ciudad'},
   idProvincia: {type: Number, ref: 'Provincia'},
   idPais: {type: Number, ref: 'Pais'},
   locacion: PolygonSchema
 });
-
-// AreaSchema.index({ locacion: '2dsphere' });
 
 module.exports = mongoose.model('Area', AreaSchema);
 
