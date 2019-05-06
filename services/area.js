@@ -2,8 +2,6 @@ const Area = require('../models/area');
 
 
 crearArea = areaData => {
-  let nuevaArea = null;
-
   const coordinates = [];
   areaData.puntos.forEach(punto => {
     coordinates.push([punto.lat, punto.lng]);
@@ -14,16 +12,15 @@ crearArea = areaData => {
     coordinates: [coordinates],
   };
 
-  const area = new Area();
-  area.nombre = 'area 1';
-  area.idCiudad = 14; // Neuquen
-  area.idProvincia = 14; // Neuquen
-  area.idPais = 1; //Argetina
-  area.locacion = locacion;
+  const area = new Area({
+    nombre: 'excavacion 1',
+    idCiudad: 14, // Neuquen
+    idProvincia: 14, // Neuquen
+    idPais: 1, //Argetina
+    locacion,
+  });
 
-  return area.save()
-    .then(area => area)
-    .catch(err => new Error(`Error al insertar area en la Base de Datos: ${err}`));
+  return area.save();
 };
 
 recuperarArea = (req, res) => {
@@ -66,8 +63,8 @@ eliminarArea = (req, res) => {
 };
 
 module.exports = {
-  recuperarArea,
+  // recuperarArea,
   crearArea,
-  modificarArea,
-  eliminarArea,
+  // modificarArea,
+  // eliminarArea,
 };

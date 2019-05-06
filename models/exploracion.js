@@ -5,9 +5,9 @@ const Schema  = mongoose.Schema;
 
 const ExploracionSchema = Schema({
   idExploracion: Number,
-  idExcavacion: {type: Number, ref: 'Excavacion'},
+  idExcavacion: {type: String, ref: 'Excavacion'},
   fecha: Date,
-  idArea: {type: Number, ref: 'Area'},
+  idArea: {type: String, ref: 'Area'},
 });
 
 module.exports = mongoose.model('Exploracion', ExploracionSchema);

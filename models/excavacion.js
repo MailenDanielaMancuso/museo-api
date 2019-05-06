@@ -26,7 +26,7 @@ const ExcavacionSchema = Schema({
   // provincia:String,
   
   idExcavacion: Number,
-  // idExploracion: { type: Number, ref: 'Exploracion' },
+  idExploracion: { type: String, ref: 'Exploracion' },
   nombre: String,
   puntoGps: PointSchema,
   // fechaInicio: Date,

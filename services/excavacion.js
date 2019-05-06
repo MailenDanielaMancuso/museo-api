@@ -1,44 +1,46 @@
 const Excavacion = require('../models/excavacion');
 const servicioArea = require('./area');
+const servicioExploracion = require('./exploracion');
+
 
 crearExcavacion = (req, res) => {
+  // crear el area
   return servicioArea.crearArea({ puntos: req.body.areaExcavacion })
   .then(area => {
-    const excavacion = new Excavacion();
-
+    // crear la excavacion
     const { puntoGPSExcavacion } = req.body;
     const puntoGPS = {
       type: 'Point',
       coordinates: [puntoGPSExcavacion.lat, puntoGPSExcavacion.lng],
     };
+    
+    const excavacion = new Excavacion({
+      nombre: 'excavacion 1',
+      idArea: area._id,
+      idCiudad: 14, //Neuquen
+      idProvincia: 14, //Neuquen
+      idPais: 1, //Argentina
+    });
     excavacion.puntoGps = puntoGPS;
-
-    // idExploracion: {type: Number, ref: 'Exploracion'}, areaExploracion
-    excavacion.nombre = 'excavacion 1';
-    excavacion.idArea = area._id;
-    excavacion.idCiudad = 14; //Neuquen
-    excavacion.idProvincia = 14; //Neuquen
-    excavacion.idPais = 1; //Argentina
-  
+    
+    // crear la exploracion
+    servicioExploracion.crearExploracion({
+      puntos: req.body.areaExploracion,
+      idExcavacion: excavacion._id,
+    })
+    .then(exploracion => {
+      excavacion._idExploracion = exploracion._idExploracion;
+    })
+    .catch(err => res.status(500).send({ message: err }));
+    
     return excavacion.save()
       .then(excavacion => res.status(200).send({ excavacion }))
-      .catch(err => res.status(500).send({ message: `Error al excavacion area en la Base de Datos: ${err}`})); 
+      .catch(() => res.status(500).send({ message: 'Error al insertar la excavacion en la Base de Datos'})); 
   })
-  .catch(err => res.status(500).send({ message: err }));
+  .catch(() => res.status(500).send({ message: 'Error al crear el area de la excavacion en la Base de Datos' }));
   
-};
-
-removeExcavacion = (req, res) => {
-    return res.status(200).send({ result: 'Excavacion eliminada' });
-    // const { areaId } = req.params;
-    // Area.remove({ '_id': areaId }, (err, value) => {
-    //     if (err) return res.status(500).send(`Error al intentar eliminar area: ${areaId}`);
-    //     if (value.result.n > 0) return res.status(200).send();
-    //     return res.status(400).send('Bar Request');
-    //     });
 };
 
 module.exports = {
   crearExcavacion,
-  // removeExcavacion,
 };
