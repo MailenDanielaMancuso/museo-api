@@ -1,6 +1,7 @@
 const Exploracion = require('../models/exploracion');
 const servicioArea = require('./area');
 
+getExploracionById = idExploracion => Exploracion.findById(idExploracion);
 
 crearExploracion = ({puntos, idExcavacion}) => {
   return servicioArea.crearArea({ puntos })
@@ -19,5 +20,6 @@ crearExploracion = ({puntos, idExcavacion}) => {
 
 module.exports = {
   crearExploracion,
+  getExploracionById,
 };
   

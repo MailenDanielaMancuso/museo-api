@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
 
-const ExploracionSchema = Schema({
-  idExploracion: Number,
-  idExcavacion: {type: String, ref: 'Excavacion'},
+const ExploracionSchema = new Schema({
+  idExploracion: String,
   fecha: Date,
-  idArea: {type: String, ref: 'Area'},
+  idArea: { type: String, ref: 'Area' },
 });
 
 module.exports = mongoose.model('Exploracion', ExploracionSchema);

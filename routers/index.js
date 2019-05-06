@@ -26,12 +26,13 @@ api.post('/persona', personaCtrl.savePersona)
 
 // Excavacion
 api.get('/excavacion', excavacionCtrl.getExcavaciones)
-api.get('/excavacionId/:excavacionId', excavacionCtrl.getExcavacionId)
 api.get('/excavacionNombre/:excavacionId',excavacionCtrl.getExcavacionNombre)
 api.get('/excavacionHome/:excavacionId', excavacionCtrl.getExcavacionesHome)
 api.get('/excavacionDirector/:excavacionId', excavacionCtrl.getExcavacionesDirector)
 api.get('/excavacionPaleontologo/:excavacionId', excavacionCtrl.getExcavacionesPaleontologo)
 api.get('/excavacionColector/:excavacionId',excavacionCtrl.getExcavacionesColector)
+
+api.get('/excavacion/:excavacionId', excavacionCtrl.getExcavacion)
 api.post('/excavacion', excavacionCtrl.crearExcavacion)
 // api.put('/excavacion', excavacionCtrl.updateExcavacion)
 // api.delete('/excavacion', excavacionCtrl.removeExcavacion)
@@ -56,7 +57,6 @@ api.post('/ejemplar', ejemplarCtrl.saveEjemplar)
 
 // Area
 // api.get('/area', areaCtrl.getAreaById)
-// api.post('/area', areaCtrl.createArea)
 // api.put('/area', areaCtrl.updateArea)
 // api.delete('/area', areaCtrl.removeArea)
 

@@ -25,8 +25,7 @@ const ExcavacionSchema = Schema({
   // localidad: String,
   // provincia:String,
   
-  idExcavacion: Number,
-  idExploracion: { type: String, ref: 'Exploracion' },
+  idExcavacion: String,
   nombre: String,
   puntoGps: PointSchema,
   // fechaInicio: Date,
@@ -37,7 +36,9 @@ const ExcavacionSchema = Schema({
   // directorId: String,
   // paleontologo: String,
   // colector: String,
+  idExploracion: { type: String, ref: 'Exploracion' },
   idArea: { type: String, ref: 'Area' },
+  
   idCiudad: { type: Number, ref: 'Ciudad' },
   idProvincia: { type: Number, ref: 'Provincia' },
   idPais: { type: Number, ref: 'Pais' },

@@ -1,6 +1,8 @@
 const Area = require('../models/area');
 
 
+getAreaById = idArea => Area.findById(idArea);
+
 crearArea = areaData => {
   const coordinates = [];
   areaData.puntos.forEach(punto => {
@@ -13,7 +15,7 @@ crearArea = areaData => {
   };
 
   const area = new Area({
-    nombre: 'excavacion 1',
+    nombre: 'area 1',
     idCiudad: 14, // Neuquen
     idProvincia: 14, // Neuquen
     idPais: 1, //Argetina
@@ -21,25 +23,6 @@ crearArea = areaData => {
   });
 
   return area.save();
-};
-
-recuperarArea = (req, res) => {
-    result = {
-      type: 'Polygon',
-      coordinates: [[
-        [-35.603500,-58.381500],
-        [-35.603600,-67.603700],
-        [-34.603700,-58.381300 ],
-        [-36.603500,-56.381500],
-      ]]
-    };
-    return res.status(200).send({ result });
-    // const { areaId } = req.params;
-    // Area.findById(areaId, (err, area) => {
-    //     if (err) return res.status(500).send(`Error al intentar recuperar el area: ${areaId}`);
-    //     if (!area) return res.status(404).send({message: 'El area buscada no existe'});
-    //     return res.status(200).send({ area });
-    // })
 };
 
 modificarArea = (req, res) => {
@@ -63,7 +46,7 @@ eliminarArea = (req, res) => {
 };
 
 module.exports = {
-  // recuperarArea,
+  getAreaById,
   crearArea,
   // modificarArea,
   // eliminarArea,
