@@ -3,33 +3,34 @@ const servicioArea = require('./area');
 const servicioExploracion = require('./exploracion');
 
 getExcavacion = (req, res) => {
-  // const excavacionId = req.params.excavacionId;
+  const excavacionId = req.params.excavacionId;
   let excavacionCompleta = {};
-  const excavacionId = "5cd0ba315143ee08da58e96c";
 
   return Excavacion.findById(excavacionId)
-    .then(excavacion => {
-      Object.assign(excavacionCompleta, excavacion._doc);
-      servicioArea.getAreaById(excavacion.idArea)
-      .then(area => {
-        excavacionCompleta.areaExcavacion = area;
+  .then(excavacion => {
+    Object.assign(excavacionCompleta, excavacion._doc);
+  
+    servicioArea.getAreaById(excavacion.idArea)
+    .then(area => {
+      excavacionCompleta.areaExcavacion = area;
 
-        servicioExploracion.getExploracionById(excavacion.idExploracion)
-        .then(exploracion => {
-          excavacionCompleta.exploracion = exploracion;
+      servicioExploracion.getExploracionById(excavacion.idExploracion)
+      .then(exploracion => {
+        excavacionCompleta.exploracion = exploracion;
 
-          servicioArea.getAreaById(exploracion.idArea)
-          .then(area => {
-            let areaExploracion = {};
-            Object.assign(areaExploracion, area._doc);
-            excavacionCompleta.areaExploracion = areaExploracion;
+        servicioArea.getAreaById(exploracion.idArea)
+        .then(area => {
+          let areaExploracion = {};
+          Object.assign(areaExploracion, area._doc);
+          excavacionCompleta.areaExploracion = areaExploracion;
 
-            res.status(200).send({ excavacionCompleta });
-          })
-        });
+          res.status(200).send({ excavacionCompleta });
+        })
+      });
     })
-    .catch(err => res.status(500).send({message:`Error al realizar la petición: ${err}`}))
-  });
+    .catch(err => res.status(500).send({message:`Error al realizar la petición: ${err}`}));
+  })
+  .catch(err => res.status(500).send({message:`Error al realizar la petición`}));
 };
 
 crearExcavacion = (req, res) => {
@@ -62,7 +63,7 @@ crearExcavacion = (req, res) => {
         .then(excavacion => res.status(200).send({ excavacion }))
         .catch(() => res.status(500).send({ message: 'Error al insertar la excavacion en la Base de Datos'}))
     })
-    .catch(err => res.status(500).send({ message: err }));
+    .catch(() => res.status(500).send({ message: 'Error al crear el area de la exploracion en la Base de Datos' }));
   })
   .catch(() => res.status(500).send({ message: 'Error al crear el area de la excavacion en la Base de Datos' }));
 };
